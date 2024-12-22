@@ -3,6 +3,7 @@ import { PostRepositoryInterface } from '../contracts/repositories/post-reposito
 import { POST_REPOSITORY } from '../contracts/tokens/post-repository.token';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { PostType } from '../types/post.type';
+import { Support } from '../types/support.type';
 
 @Injectable()
 export class PostService {
@@ -16,5 +17,28 @@ export class PostService {
 
   async findById(id: number): Promise<PostType | null> {
     return await this.postRepository.findById(id);
+  }
+
+  async addSupport(postId: number, userId: number): Promise<Support> {
+    return await this.postRepository.addSupport(postId, userId);
+  }
+
+  async removeSupport(postId: number, userId: number): Promise<Support> {
+    return await this.postRepository.removeSupport(postId, userId);
+  }
+
+  async increaseScore(postId: number, score: number) {
+    await this.postRepository.increaseScore(postId, score);
+  }
+
+  async decreseScore(postId: number, score: number) {
+    await this.postRepository.decreaseScore(postId, score);
+  }
+
+  async checkIfSupportedByUser(
+    userId: number,
+    postId: number,
+  ): Promise<boolean> {
+    return this.postRepository.checkIfSupportedByUser(userId, postId);
   }
 }

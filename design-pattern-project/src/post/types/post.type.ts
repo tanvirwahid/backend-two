@@ -3,4 +3,5 @@ export class PostType {
   title: string;
   body: string;
   userId: number;
+  score: number;
 }
