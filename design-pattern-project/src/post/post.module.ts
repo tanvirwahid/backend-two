@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { PostController } from './controllers/post.controller';
 import { PostService } from './services/post.service';
-import { UserExistsConstraint } from './Validators/user-exists.validator';
-import { PostRepository } from './Repositories/post.repository';
+import { UserExistsConstraint } from './validators/user-exists.validator';
+import { PostRepository } from './repositories/post.repository';
 import { POST_REPOSITORY } from './contracts/tokens/post-repository.token';
 import { UserModule } from '../user/user.module';
-import { PostExistsValidator } from './Validators/post-exists.validator';
+import { PostExistsValidator } from './validators/post-exists.validator';
+import { PostCache } from './caches/post.cache';
 
 @Module({
   imports: [UserModule],
@@ -18,6 +19,7 @@ import { PostExistsValidator } from './Validators/post-exists.validator';
       provide: POST_REPOSITORY,
       useClass: PostRepository,
     },
+    PostCache,
   ],
   exports: [PostService, PostExistsValidator],
 })

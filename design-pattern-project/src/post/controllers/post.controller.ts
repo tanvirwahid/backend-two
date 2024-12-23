@@ -1,8 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  ParseIntPipe,
   Post,
   UsePipes,
   ValidationPipe,
@@ -23,7 +26,30 @@ export class PostController {
 
     return {
       status: 'success',
-      data: new PostDto(post.id, post.title, post.body, post.userId),
+      data: new PostDto(
+        post.id,
+        post.title,
+        post.body,
+        post.userId,
+        post.score,
+      ),
+      message: 'Post created successfully',
+    };
+  }
+
+  @Get('/:id')
+  async show(@Param('id', ParseIntPipe) id: number) {
+    const post = await this.postService.findById(id);
+
+    return {
+      status: 'success',
+      data: new PostDto(
+        post.id,
+        post.title,
+        post.body,
+        post.userId,
+        post.score,
+      ),
       message: 'Post created successfully',
     };
   }

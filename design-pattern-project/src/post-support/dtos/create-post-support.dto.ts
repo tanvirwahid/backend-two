@@ -1,7 +1,7 @@
 import { IsInt, IsNotEmpty } from 'class-validator';
 import { ValidateIfUserExists } from '../../user/validators/user-exists.validator';
 import { Expose, Transform } from 'class-transformer';
-import { ValidateIfPostExists } from '../../post/Validators/post-exists.validator';
+import { ValidateIfPostExists } from '../../post/validators/post-exists.validator';
 
 export class CreatePostSupportDto {
   @IsNotEmpty({ message: 'user_id is required' })

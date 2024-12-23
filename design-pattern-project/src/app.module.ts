@@ -7,9 +7,17 @@ import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { UserModule } from './user/user.module';
 import { PostSupportModule } from './post-support/post-support.module';
+import { CustomCacheModule } from './cache/cache.module';
 
 @Module({
-  imports: [PrismaModule, PostModule, CommentModule, UserModule, PostSupportModule],
+  imports: [
+    PrismaModule,
+    PostModule,
+    CommentModule,
+    UserModule,
+    PostSupportModule,
+    CustomCacheModule,
+  ],
   controllers: [AppController],
   providers: [AppService, HashService],
 })

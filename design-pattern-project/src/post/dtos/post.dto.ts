@@ -4,5 +4,6 @@ export class PostDto {
     public readonly title: string,
     public readonly body: string,
     public readonly user_id: number,
+    public score: number,
   ) {}
 }

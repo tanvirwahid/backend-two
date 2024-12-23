@@ -10,6 +10,7 @@ import { UserReputationDecrementService } from './services/user-reputation-decre
 import { SupportFactory } from './services/factories/support.factory';
 import { SupportAdderFactory } from './services/factories/support-adder.factory';
 import { SupportRemoverFactory } from './services/factories/support-remover.factory';
+import { PostSupportCache } from './cache/post-support.cache';
 
 @Module({
   imports: [UserModule, PostModule],
@@ -22,6 +23,7 @@ import { SupportRemoverFactory } from './services/factories/support-remover.fact
     SupportFactory,
     SupportAdderFactory,
     SupportRemoverFactory,
+    PostSupportCache,
   ],
   controllers: [PostSupportController],
 })

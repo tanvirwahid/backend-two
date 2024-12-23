@@ -4,11 +4,14 @@ import { POST_REPOSITORY } from '../contracts/tokens/post-repository.token';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { PostType } from '../types/post.type';
 import { Support } from '../types/support.type';
+import { PostCache } from '../caches/post.cache';
 
 @Injectable()
 export class PostService {
   constructor(
-    @Inject(POST_REPOSITORY) private postRepository: PostRepositoryInterface,
+    @Inject(POST_REPOSITORY)
+    private postRepository: PostRepositoryInterface,
+    private postCache: PostCache,
   ) {}
 
   async store(createPostData: CreatePostDto): Promise<PostType> {
@@ -16,7 +19,7 @@ export class PostService {
   }
 
   async findById(id: number): Promise<PostType | null> {
-    return await this.postRepository.findById(id);
+    return await this.postCache.findById(id);
   }
 
   async addSupport(postId: number, userId: number): Promise<Support> {
