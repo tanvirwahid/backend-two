@@ -1,11 +1,16 @@
-import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { CommentController } from './controllers/comment.controller';
-import {UserModule} from "../user/user.module";
-import {COMMENT_REPOSITORY} from "./contracts/tokens/comment-repository.token";
-import {CommentRepository} from "./repositories/comment.repository";
+import { UserModule } from '../user/user.module';
+import { COMMENT_REPOSITORY } from './contracts/tokens/comment-repository.token';
+import { CommentRepository } from './repositories/comment.repository';
 import { CommentService } from './services/comment.service';
-import {PostExistsMiddleware} from "./middlewares/post-exists.middleware";
-import {PostModule} from "../post/post.module";
+import { PostExistsMiddleware } from './middlewares/post-exists.middleware';
+import { PostModule } from '../post/post.module';
 
 @Module({
   imports: [UserModule, PostModule],
@@ -13,14 +18,15 @@ import {PostModule} from "../post/post.module";
   providers: [
     {
       provide: COMMENT_REPOSITORY,
-      useClass: CommentRepository
+      useClass: CommentRepository,
     },
-    CommentService
-  ]
+    CommentService,
+  ],
 })
 export class CommentModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(PostExistsMiddleware)
-        .forRoutes({ path: 'posts/:postId*', method: RequestMethod.ALL });
+    consumer
+      .apply(PostExistsMiddleware)
+      .forRoutes({ path: 'posts/:postId*', method: RequestMethod.ALL });
   }
 }
