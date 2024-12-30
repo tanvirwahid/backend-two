@@ -50,3 +50,31 @@ model Hadith {
 
   @@map("hadiths")
 }
+
+model Book {
+  id      Int          @id @default(autoincrement())
+  name    String
+  author  String
+  price   Float
+  bundles BookBundle[]
+
+  @@map("books")
+}
+
+model Bundle {
+  id    Int          @id @default(autoincrement())
+  name  String
+  price Float
+  books BookBundle[]
+}
+
+model BookBundle {
+  id       Int    @id @default(autoincrement())
+  bundleId Int
+  bookId   Int
+  book     Book   @relation(fields: [bookId], references: [id])
+  bundle   Bundle @relation(fields: [bundleId], references: [id])
+
+  @@unique([bookId, bundleId])
+  @@map("book_bundles")
+}

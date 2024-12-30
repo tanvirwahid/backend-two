@@ -10,6 +10,7 @@ import { PostSupportModule } from './post-support/post-support.module';
 import { CustomCacheModule } from './cache/cache.module';
 import { HadithModule } from './hadith/hadith.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BookLibraryModule } from './book-library/book-library.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     PostSupportModule,
     CustomCacheModule,
     HadithModule,
+    BookLibraryModule,
   ],
   controllers: [AppController],
   providers: [AppService, HashService],
