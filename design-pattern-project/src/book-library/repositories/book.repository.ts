@@ -2,7 +2,7 @@ import { BookRepositoryInterface } from '../contracts/repositories/book-reposito
 import { PrismaService } from '../../prisma/services/prisma.service';
 import { CreateBookDto } from '../dtos/create-book.dto';
 import { BookType } from '../types/book.type';
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BookRepository implements BookRepositoryInterface {

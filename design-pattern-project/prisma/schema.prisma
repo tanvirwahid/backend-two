@@ -52,29 +52,22 @@ model Hadith {
 }
 
 model Book {
-  id      Int          @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   name    String
   author  String
   price   Float
-  bundles BookBundle[]
+  bundles Bundle[] @relation("book_bundles")
 
   @@map("books")
 }
 
 model Bundle {
-  id    Int          @id @default(autoincrement())
-  name  String
-  price Float
-  books BookBundle[]
-}
+  id            Int      @id @default(autoincrement())
+  name          String
+  price         Float
+  books         Book[]   @relation("book_bundles")
+  bundles       Bundle[] @relation("nested_bundles")
+  parentBundles Bundle[] @relation("nested_bundles")
 
-model BookBundle {
-  id       Int    @id @default(autoincrement())
-  bundleId Int
-  bookId   Int
-  book     Book   @relation(fields: [bookId], references: [id])
-  bundle   Bundle @relation(fields: [bundleId], references: [id])
-
-  @@unique([bookId, bundleId])
-  @@map("book_bundles")
+  @@map("bundles")
 }
