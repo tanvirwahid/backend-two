@@ -10,9 +10,11 @@ import { BundleRepository } from './repositories/bundle.repository';
 import { BooksExistValidator } from './validators/books-exist.validator';
 import { BundlesExistValidator } from './validators/bundles-exist.validator';
 import { BookItemFactory } from './entities/factories/book-item.factory';
+import { BundleCache } from './cache/bundle.cache';
 
 @Module({
   providers: [
+    BundleCache,
     BookItemFactory,
     {
       provide: TOKEN_BOOKREPOSITORY,

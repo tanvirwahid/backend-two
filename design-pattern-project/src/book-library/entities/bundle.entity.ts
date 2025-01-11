@@ -1,8 +1,8 @@
 import { BookItem } from '../contracts/book-item.interface';
 import { BookType } from '../types/book.type';
-import { BundleRepositoryInterface } from '../contracts/repositories/bundle-repository.interface';
 import { BookItemFactory } from './factories/book-item.factory';
 import { Book } from './book.entity';
+import { BundleCache } from '../cache/bundle.cache';
 
 export class Bundle implements BookItem {
   static BUNDLE_ENTITY = 'bundle';
@@ -13,7 +13,7 @@ export class Bundle implements BookItem {
     private id: number,
     private name: string,
     private price: number,
-    private bundleRepository: BundleRepositoryInterface,
+    private bundleCache: BundleCache,
     private bookItemFactory: BookItemFactory,
   ) {}
 
@@ -31,7 +31,7 @@ export class Bundle implements BookItem {
   }
 
   private async populateNestedBooks() {
-    const books = await this.bundleRepository.findNestedBooksById(this.id);
+    const books = await this.bundleCache.findNestedBundlesById(this.id);
     for (const book of books.books) {
       this.nestedBooks.push(
         this.bookItemFactory.getBookItem(Book.BOOK_ENTITY, book),
